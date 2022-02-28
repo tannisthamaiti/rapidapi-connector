@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>8c2fb2f3-907e-4fac-a368-09580403babb</groupId>
+    <artifactId>rapidapi-connector</artifactId>
+    <version>1.0.21</version>
+    <packaging>mule-extension</packaging>
+
+    <parent>
+        <groupId>org.mule.extensions</groupId>
+        <artifactId>mule-modules-parent</artifactId>
+        <version>1.1.3</version>
+    </parent>
+
+    <properties>
+        <metadataModelJsonVersion>1.1.1</metadataModelJsonVersion>
+        <muleCoreVersion>4.1.1</muleCoreVersion>
+
+        <!-- Remove when a new parent version with MTF is available -->
+        <munit.input.directory>src/test/munit</munit.input.directory>
+        <munit.output.directory>${basedir}/target/test-mule/munit</munit.output.directory>
+        <munit.extensions.maven.plugin.version>1.0.0-BETA</munit.extensions.maven.plugin.version>
+        <munit.version>2.2.0-BETA</munit.version>
+        <mavenResourcesVersion>3.0.2</mavenResourcesVersion>
+    </properties>
+    <repositories>
+	    <repository>
+			<id>MuleRepository</id>
+			<name>MuleRepository</name>
+			<url>https://repository.mulesoft.org/nexus-ee/content/repositories/releases-ee/</url>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+    </repositories>
+
+    <dependencies>
+		<dependency>
+            <groupId>org.mule.connectors</groupId>
+            <artifactId>mule-objectstore-connector</artifactId>
+            <version>1.1.3</version>
+            <classifier>mule-plugin</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.mulesoft.muleesb.modules</groupId>
+            <artifactId>mule-module-batch-ee</artifactId>
+            <version>3.8.3</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mulesoft.mule.runtime.modules</groupId>
+            <artifactId>mule-module-batch-ee</artifactId>
+            <version>4.2.2</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mule.runtime</groupId>
+            <artifactId>mule-metadata-model-json</artifactId>
+            <version>${metadataModelJsonVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mule.runtime</groupId>
+            <artifactId>mule-core</artifactId>
+            <version>${muleCoreVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${mavenResourcesVersion}</version>
+                <executions>
+                    <execution>
+                        <id>copy-munit-resources</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${munit.output.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${munit.input.directory}</directory>
+                                    <filtering>true</filtering>
+                                </resource>
+                            </resources>
+
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <distributionManagement>
+        <downloadUrl>http://www.mulesoft.org/display/MULE/Download</downloadUrl>
+        <repository>
+            <id>mule-releases</id>
+            <name>Mule Release Repository</name>
+            <url>https://maven.anypoint.mulesoft.com/api/v1/organizations/8c2fb2f3-907e-4fac-a368-09580403babb/maven</url>
+        </repository>
+        <snapshotRepository>
+            <id>mule-snapshots</id>
+            <name>Mule Snapshot Repository</name>
+            <url>https://maven.anypoint.mulesoft.com/api/v1/organizations/8c2fb2f3-907e-4fac-a368-09580403babb/maven</url>
+            <uniqueVersion>false</uniqueVersion>
+        </snapshotRepository>
+    </distributionManagement>
+</project>
