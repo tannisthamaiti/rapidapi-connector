@@ -1,0 +1,19 @@
+<mule xmlns="http://www.mulesoft.org/schema/mule/core"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns:rapidapi="http://www.mulesoft.org/schema/mule/rapidapi"
+      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+          http://www.mulesoft.org/schema/mule/rapidapi http://www.mulesoft.org/schema/mule/rapidapi/current/mule-rapidapi.xsd">
+
+    <rapidapi:config name="config" configId="configId">
+        <rapidapi:connection requiredParameter="aValue" />
+    </rapidapi:config>
+
+    <flow name="sayHiFlow">
+        <rapidapi:say-hi person="Mariano Gonzalez"/>
+    </flow>
+
+    <flow name="retrieveInfoFlow">
+        <rapidapi:retrieve-info config-ref="config"/>
+    </flow>
+
+</mule>
